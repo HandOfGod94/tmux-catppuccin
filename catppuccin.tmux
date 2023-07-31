@@ -69,11 +69,11 @@ main() {
   local wt_enabled
   wt_enabled="$(get_tmux_option "@catppuccin_window_tabs_enabled" "off")"
   readonly wt_enabled
- 
+
   local pill_theme_enabled
   pill_theme_enabled="$(get_tmux_option "@catppuccin_pill_theme_enabled" "off")"
   readonly pill_theme_enabled
-  
+
   local powerline_theme_enabled
   powerline_theme_enabled="$(get_tmux_option "@catppuccin_powerline_theme_enabled" "off")"
   readonly powerline_theme_enabled
@@ -85,8 +85,8 @@ main() {
   local no_patched_fonts_theme_enabled
   no_patched_fonts_theme_enabled="$(get_tmux_option "@catppuccin_no_patched_fonts_theme_enabled" "off")"
   readonly no_patched_fonts_theme_enabled
-  
-  # Separators for the left status / window list 
+
+  # Separators for the left status / window list
   local l_left_separator
   l_left_separator="$(get_tmux_option "@catppuccin_l_left_separator" "")"
   readonly l_left_separator
@@ -95,7 +95,7 @@ main() {
   l_right_separator="$(get_tmux_option "@catppuccin_l_right_separator" "")"
   readonly l_right_separator
 
-  # Separators for the right status 
+  # Separators for the right status
   local r_left_separator
   r_left_separator="$(get_tmux_option "@catppuccin_r_left_separator" "")"
   readonly r_left_separator
@@ -103,7 +103,7 @@ main() {
   local r_right_separator
   r_right_separator="$(get_tmux_option "@catppuccin_r_right_separator" "")"
   readonly r_right_separator
-  
+
   local user
   user="$(get_tmux_option "@catppuccin_user" "off")"
   readonly user
@@ -115,7 +115,11 @@ main() {
   local date_time
   date_time="$(get_tmux_option "@catppuccin_date_time" "off")"
   readonly date_time
- 
+
+  local kubernetes
+  kubernetes="$(get_tmux_option "@catppuccin_kubernetes" "on")"
+  readonly kubernetes
+
   # Icons
   local directory_icon
   directory_icon="$(get_tmux_option "@catppuccin_directory_icon" "")"
@@ -141,9 +145,13 @@ main() {
   datetime_icon="$(get_tmux_option "@catppuccin_datetime_icon" "")"
   readonly datetime_icon
 
+  local kubernetes_icon
+  kubernetes_icon="$(get_tmux_option "@catppuccin_kubernetes_icon" "⎈")"
+  readonly kubernetes_icon
+
   # Source status line themes
   if [[ "${pill_theme_enabled}" == "off" ]] &&
-    [[ "${powerline_theme_enabled}"  == "off" ]] && 
+    [[ "${powerline_theme_enabled}"  == "off" ]] &&
     [[ "${powerline_icons_theme_enabled}" == "off" ]] &&
     [[ "${no_patched_fonts_theme_enabled}" == "off" ]]; then
     source "$PLUGIN_DIR/$DEFAULT_STATUS_LINE_FILE"
@@ -166,7 +174,7 @@ main() {
   fi
 
   # Right column 1 by default shows the Window name.
-  local right_column1=$show_window
+  local right_column1=$show_kubernetes_conf
 
   # Right column 2 by default shows the current Session name.
   local right_column2=$show_session
